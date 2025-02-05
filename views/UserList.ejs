@@ -1,0 +1,54 @@
+<% title = 'UserList' %>
+<%- include('Navbar') %> 
+
+<div class="container mt-4">
+  <!-- Heading -->
+  <h2 class="font-weight-bold text-center mb-4">Users List</h2>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped shadow-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Sl. No</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (users && users.length > 0) { %>
+          <% users.forEach((user, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td>
+                <a href="/userprofile/<%= user._id %>" class="text-decoration-none">
+                <%= user.name %>
+               </a>
+             </td>
+              <td><%= user.email %></td>
+              <td>
+                <span class="<%= user.isBlocked ? 'text-danger' : 'text-success' %>">
+                  <%= user.isBlocked ? 'Blocked' : 'Active' %>
+                </span>
+              </td>
+              <td>
+                <form action="/userlist/<%= user._id %>/toggleBlock" method="POST" style="display: inline;">
+                  <button class="btn btn-<%= user.isBlocked ? 'success' : 'danger' %> btn-sm">
+                    <%= user.isBlocked ? 'Unblock' : 'Block' %>
+                  </button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="5" class="text-center">No users found</td>
+          </tr>
+        <% } %>
+      </tbody>
+      
+    </table>
+  </div>
+</div>

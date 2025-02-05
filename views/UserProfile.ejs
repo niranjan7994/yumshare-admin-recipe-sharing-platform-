@@ -1,0 +1,36 @@
+<% title = 'UserProfile' %>
+<%- include('Navbar') %> 
+
+<div class="container mt-5">
+  <!-- Heading -->
+  <h1 class="text-center mb-2">Recipe List of <%= user.name %></h1>
+  <!-- <h4 class="text-center text-muted">Name: <%= user.name %></h4> -->
+
+  <!-- Recipe Table -->
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col " class="border-right">Sl. No</th>
+        <th scope="col">Recipe Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (recipes && recipes.length > 0) { %>
+        <% recipes.forEach((recipe, index) => { %>
+          <tr>
+            <td class="border-right"><%= index + 1 %></td>
+            <td>
+              <a href="/recipedetails/<%= recipe._id %>" class="text-decoration-none">
+              <%= recipe.title %>
+              </a>
+            </td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="2" class="text-center">No recipes found</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

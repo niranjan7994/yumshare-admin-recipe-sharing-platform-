@@ -1,0 +1,35 @@
+<% title = 'MostViewedRecipe' %>
+<%- include('Navbar') %> 
+
+<div class="container mt-4">
+  <!-- Heading -->
+  <h2 class="font-weight-bold text-center mb-4">Most Viewed Recipes</h2>
+
+  <!-- Table with Shadow and Border -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped shadow-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Sl. No</th>
+          <th scope="col">Title</th>
+          <th scope="col">View Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (recipes && recipes.length > 0) { %>
+          <% recipes.forEach((recipe, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= recipe.title %></td>
+              <td><%= recipe.viewCount %></td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="3" class="text-center">No recipes found</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>

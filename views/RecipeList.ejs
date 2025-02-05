@@ -1,0 +1,50 @@
+<% title = 'Recipe List' %>
+<%- include('Navbar') %> 
+
+<div class="container mt-4">
+  <!-- Heading -->
+  <h2 class="font-weight-bold text-center mb-4">Recipe List</h2>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped shadow-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Sl. No</th>
+          <th scope="col">Title</th>
+          <th scope="col">Creator Name</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (recipes.length > 0) { %>
+          <% recipes.forEach((recipe, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= recipe.title %></td>
+              <td><%= recipe.creatorId ? recipe.creatorId.name : 'Unknown' %></td>
+              <td>
+                <a href="/recipedetails/<%= recipe._id %>" class="btn btn-info btn-block">
+                  View Details
+                </a>
+                <form action="/deleterecipe/<%= recipe._id %>" method="POST">
+                  <button type="submit" class="btn btn-danger btn-block mt-2" onclick="return confirmDelete()">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="4" class="text-center">No recipes found.</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  function confirmDelete() {
+    return confirm("Are you sure you want to delete this recipe?");
+  }
+</script>
